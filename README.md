@@ -1,0 +1,2 @@
+# social
+Sosyal medya oluşturma
