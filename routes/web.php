@@ -1,7 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\front\indexController;
+use App\Http\Controllers\front\question\indexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,10 @@ use App\Http\Controllers\front\indexController;
 
 Auth::routes();
 
-Route::group(['namespace'=>'front'],function(){
-Route::get('/',[indexController::class,'index'])->name('index');
+Route::group(['namespace' => 'front'], function () {
+    Route::get('/', [indexController::class, 'index'])->name('index');
+
+    Route::group(['namespace' => 'question', 'as' => 'question.', 'prefix' => 'question'], function () {
+        Route::get('/create', [indexController::class, 'create'])->name('create');
+    });
 });

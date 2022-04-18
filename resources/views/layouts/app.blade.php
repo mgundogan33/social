@@ -82,7 +82,7 @@
             @auth
                 <div class="control--menu">
                     <div class="container">
-                        <a href="#">+ Yeni Soru Sor </a>
+                        <a href="{{route('question.create')}}">+ Yeni Soru Sor </a>
                     </div>
                 </div>
             @endauth
