@@ -20,6 +20,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/m.css') }}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    @yield('header')
 </head>
 
 <body>
@@ -62,7 +65,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                                                     document.getElementById('logout-form').submit();">
                                         Çıkış
                                     </a>
 
@@ -82,13 +85,15 @@
             @auth
                 <div class="control--menu">
                     <div class="container">
-                        <a href="{{route('question.create')}}">+ Yeni Soru Sor </a>
+                        <a href="{{ route('question.create') }}">+ Yeni Soru Sor </a>
                     </div>
                 </div>
             @endauth
             @yield('content')
         </main>
     </div>
+
+    @yield('footer')
 </body>
 
 </html>

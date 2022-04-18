@@ -1,4 +1,10 @@
 @extends('layouts.app')
+@section('header')
+    <link rel="stylesheet" href="{{ asset('plugins/tokenfield/css/bootstrap-tokenfield.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/tokenfield/css/tokenfield-typeahead.css') }}">
+
+    <script src="{{ asset('plugins/tokenfield/bootstrap-tokenfield.js') }}"></script>
+@endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -17,12 +23,14 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <label for="">Kategori Seçimi</label>
+                                    <label for=""><strong>Kategori Seçimi</strong></label>
                                     <div class="row">
                                         @foreach ($category as $key => $value)
-                                            <div class="col-md-3">
-                                                {{ $value['name'] }}
-                                                <input type="checkbox" name="category[]" value="{{ $value['id'] }}">
+                                            <div class="col-md-3 ">
+                                                <div class="m-checkbox">
+                                                    <input type="checkbox" name="category[]" value="{{ $value['id'] }}">
+                                                    {{ $value['name'] }}
+                                                </div>
                                             </div>
                                         @endforeach
                                     </div>
@@ -38,13 +46,13 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label for="">Etiketler</label>
-                                    <input type="text" name="tags" class="form-control">
+                                    <input type="text" name="tags" id="tokenfield" class="form-control">
                                 </div>
                             </div>
 
 
                             <div class="row mb-0">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-2">
                                     <button type="submit" class="btn btn-primary">
                                         Soruyu Sor
                                     </button>
@@ -58,4 +66,9 @@
             </div>
         </div>
     </div>
+@endsection
+@section('footer')
+    <script>
+        $("#tokenfield").tokenfield();
+    </script>
 @endsection
