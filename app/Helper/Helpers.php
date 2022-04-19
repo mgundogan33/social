@@ -5,7 +5,7 @@ use App\Files;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-class mHelper
+class Helpers
 {
 
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\front\question\indexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,6 @@ Route::group(['namespace' => 'front'], function () {
 
     Route::group(['namespace' => 'question', 'as' => 'question.', 'prefix' => 'question'], function () {
         Route::get('/create', [App\Http\Controllers\front\question\indexController::class, 'create'])->name('create');
+        Route::post('/store',[App\Http\Controllers\front\question\indexController::class, 'store'])->name('store');
     });
 });

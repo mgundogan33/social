@@ -2,17 +2,18 @@
 @section('header')
     <link rel="stylesheet" href="{{ asset('plugins/tokenfield/css/bootstrap-tokenfield.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/tokenfield/css/tokenfield-typeahead.css') }}">
-
-    <script src="{{ asset('plugins/tokenfield/bootstrap-tokenfield.js') }}"></script>
 @endsection
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if (session('status'))
+                    <div class="alert alert-success">{{ session('status') }}</div>
+                @endif
                 <div class="card">
                     <div class="card-header">Yeni Soru Sor</div>
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form  action="{{ route('question.store') }}" method="POST">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-12">
@@ -68,6 +69,8 @@
     </div>
 @endsection
 @section('footer')
+    <script src="{{ asset('plugins/tokenfield/bootstrap-tokenfield.js') }}"></script>
+    <script src="{{ asset('plugins/tokenfield/bootstrap-tokenfield.min.js') }}"></script>
     <script>
         $("#tokenfield").tokenfield();
     </script>
