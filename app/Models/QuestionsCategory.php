@@ -10,4 +10,8 @@ class QuestionsCategory extends Model
     use HasFactory;
     protected $guarded=[];
 
+    static function getCount($categoryId){
+        return QuestionsCategory::where('category',$categoryId)->count();
+    }
+
 }
