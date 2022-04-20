@@ -22,6 +22,10 @@ Route::group(['namespace' => 'front'], function () {
 
     Route::group(['namespace' => 'question', 'as' => 'question.', 'prefix' => 'question'], function () {
         Route::get('/create', [App\Http\Controllers\front\question\indexController::class, 'create'])->name('create');
-        Route::post('/store',[App\Http\Controllers\front\question\indexController::class, 'store'])->name('store');
+        Route::post('/store', [App\Http\Controllers\front\question\indexController::class, 'store'])->name('store');
     });
+    Route::group(['namespace'=>'comment','as'=>'comment.','prefix'=>'comment'],function(){
+        Route::post('/store/{id}',[App\Http\Controllers\front\question\indexController::class, 'store'])->name('store');
+    });
+    Route::get('/{id}/{selflink}', [App\Http\Controllers\front\indexController::class, 'view'])->name('view');
 });
