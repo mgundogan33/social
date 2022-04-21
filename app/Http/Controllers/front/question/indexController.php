@@ -36,7 +36,7 @@ class indexController extends Controller
         $tags = explode(',', $all['tags']);
         unset($all['tags']);
 
-        $all['userId']=Auth::id();
+        $all['userId'] = Auth::id();
 
         $all['selflink'] = Helpers::permalink($all['text']);
         //dd($all);

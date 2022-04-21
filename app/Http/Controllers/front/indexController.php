@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Comments;
 use Symfony\Component\Console\Question\Question;
 
 class indexController extends Controller
@@ -19,7 +20,8 @@ class indexController extends Controller
         $c = Questions::where('id', $id)->where('selflink', $selflink)->count();
         if ($c != 0) {
             $data = Questions::where('id', $id)->where('selflink', $selflink)->get();
-            return view('front.question.view',['data'=>$data]);
+            $comments = Comments::where('questionId', $id)->orderBy('id', 'desc')->get();
+            return view('front.question.view', ['data' => $data, 'comments' => $comments]);
         } else {
             abort(404);
         }

@@ -21,13 +21,14 @@
                                             {{ \App\Helper\Helpers::split($v['text'], 120) }}
                                         </div>
                                         <div class="detail">
-                                            <a href="">1 Yorum</a>-<a href="">101 Görüntülenme</a>-<a href="{{route('view',['selflink'=>$v['selflink'],'id'=>$v['id']]) }}">Devamını Oku</a>
+                                            <a href="">{{ \App\Models\Comments::getCount($v['id']) }} Yorum</a>-<a href="">101 Görüntülenme</a>-<a href="{{route('view',['selflink'=>$v['selflink'],'id'=>$v['id']]) }}">Devamını Oku</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     @endforeach
+
                 </ul>
                 {!! $data->links() !!}
             </div>

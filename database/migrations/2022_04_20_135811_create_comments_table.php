@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('userId');
             $table->integer('questionId');
             $table->text('text');
+            $table->integer('isCorrect');
             $table->timestamps();
         });
     }

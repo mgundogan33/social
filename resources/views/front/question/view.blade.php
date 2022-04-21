@@ -14,7 +14,7 @@
                                     alt="Generic placeholder image">
                             </div>
                             <div class="col-md-10">
-                                <div class="media-body ">
+                                <div class="media-body">
                                     <div class="title">
                                         <a href=""
                                             class="mt-0">{{ $data[0]['title'] }}</a>{{ \App\Helper\Helpers::time_ago($data[0]['created_at']) }}
@@ -22,7 +22,8 @@
                                     <div class="description">{{ $data[0]['text'] }}
                                     </div>
                                     <div class="detail">
-                                        <a href="">1 Yorum</a>-<a href="">101 Görüntülenme</a>
+                                        <a href="">{{ \App\Models\Comments::getCount($data[0]['userId']) }} Yorum</a>-<a
+                                            href="">101 Görüntülenme</a>
                                         @if (Auth::id() == $data[0]['userId'])
                                             <a href="">Düzenle</a>-<a href="">Sil</a>
                                         @endif
@@ -32,6 +33,38 @@
                         </div>
                     </li>
                 </ul>
+                <div class="category--title bg-success d-block text-center p-2 text-white">Cevaplar</div>
+                @if (\App\Models\Comments::getCount($data[0]['id']) != 0)
+                    <ul class="list-unstyled">
+                        @foreach ($comments as $k => $v)
+                            <li class="media">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="media-body ">
+                                            <div class="title">
+                                                <a
+                                                    class="mt-0">{{ \App\Models\User::getName($v['userId']) }}</a>
+                                                {{ \App\Helper\Helpers::time_ago($v['created_at']) }}
+                                            </div>
+                                            <div class="description">
+                                                {!! $v['text'] !!}
+                                            </div>
+                                            <div class="detail">
+                                                <a href="">Beğen (0)</a>
+                                                @if (Illuminate\Support\Facades\Auth::id() == $data[0]['id'])
+                                                    <a href="">Bu Cevap Doğru </a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <div class="alert alert-info">Henüz Cevap Girilmemiş.</div>
+                @endif
+
 
                 @if (session('status'))
                     <div class="alert alert-success">{{ session('status') }}</div>
@@ -39,12 +72,12 @@
                 <div class="card">
                     <div class="card-header">Cevap Yaz</div>
                     <div class="card-body">
-                        <form  method="POST" action="{{ route('comment.store',['id'=>$data[0]['id']]) }}">
+                        <form method="POST" action="{{ route('comment.store', ['id' => $data[0]['id']]) }}">
                             @csrf
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label for="">Cevabınız</label>
-                                    <textarea name="text" id="" class="form-control" cols="30" rows="10"></textarea>
+                                    <textarea required name="text" id="" class="form-control" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
                             <div class="row mb-0">

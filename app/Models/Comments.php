@@ -9,5 +9,9 @@ class Comments extends Model
 {
     use HasFactory;
 
-    protected $guarded=[];
+    protected $guarded = [];
+    static function getCount($questionId)
+    {
+        return Comments::where('questionId',$questionId)->count();
+    }
 }
