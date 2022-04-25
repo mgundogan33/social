@@ -69,4 +69,23 @@ class IndexController extends Controller
             abort(404);
         }
     }
+    public function correct($id)
+    {
+        $c = Comments::where('id', $id)->count();
+        if ($c != 0) {
+            $w = Comments::where('id', $id)->get();
+            $data = Questions::where('id', $w[0]['questionId'])->get();
+            if ($data[0]['userId'] == Auth::id()) {
+                $control = Comments::where('questionId', $data[0]['id'])->where('isCorrect', 1)->count();
+                if ($control == 0) {
+                    Comments::where('id', $id)->update(['isCorrect' => 1]);
+                }
+                return redirect()->back();
+            } else {
+                abort(404);
+            }
+        } else {
+            abort(404);
+        }
+    }
 }

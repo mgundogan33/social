@@ -12,6 +12,10 @@ class Comments extends Model
     protected $guarded = [];
     static function getCount($questionId)
     {
-        return Comments::where('questionId',$questionId)->count();
+        return Comments::where('questionId', $questionId)->count();
+    }
+    static function isCorrectVariable($questionId)
+    {
+        return Comments::where('questionId', $questionId)->where('isCorrect', 1)->count();
     }
 }

@@ -18,3 +18,4 @@ a.title {display: block;}
 .media-body.description {margin-bottom: 10px;}
 .tag--list {padding: 5px; background: #bcb5b5; border-radius: 5px;}
 .detail{margin-top: 5px;background-color:rgb(234, 224, 224) ;padding: 5px;}
+.isCorrect{padding: 3px; border: 2px dotted green;}

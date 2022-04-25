@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="detail">
                                         <a href="">{{ \App\Models\Comments::getCount($data[0]['userId']) }} Yorum</a>-<a
-                                            href="">{{\App\Models\Visitor::getCount($data[0]['id'])}} Görüntülenme</a>
+                                            href="">{{ \App\Models\Visitor::getCount($data[0]['id']) }} Görüntülenme</a>
                                         @if (Auth::id() == $data[0]['userId'])
                                             <a href="">Düzenle</a>-<a href="">Sil</a>
                                         @endif
@@ -42,20 +42,26 @@
                                     <div class="col-md-10">
                                         <div class="media-body ">
                                             <div class="title">
-                                                <a class="mt-0">{{ \App\Models\User::getName($v['userId']) }}</a>
+                                                <a
+                                                    class="mt-0">{{ \App\Models\User::getName($v['userId']) }}</a>
                                                 {{ \App\Helper\Helpers::time_ago($v['created_at']) }}
+                                                @if ($v['isCorrect'] == 1)
+                                                    <span class="isCorrect">Doğru Cevap</span>
+                                                @endif
                                             </div>
                                             <div class="description">
                                                 {!! $v['text'] !!}
                                             </div>
                                             <div class="detail">
                                                 @if ($v['userId'] != \Illuminate\Support\Facades\Auth::id())
-                                                <a href="{{route('comment.LikeOrDiskLike',['id'=>$v['id']])}}">Beğen ({{\App\Models\LikeComment::getCount($v['id'])}}) </a>
+                                                    <a href="{{ route('comment.LikeOrDiskLike', ['id' => $v['id']]) }}">Beğen
+                                                        {{ \App\Models\LikeComment::getCount($v['id']) == 0 ?? '('.\App\Models\LikeComment::getCount($v['id']).')' }}      </a>
                                                 @else
-                                                <a href="{{route('comment.delete',['id'=>$v['id']])}}">Sil</a>
+                                                    <a href="{{ route('comment.delete', ['id' => $v['id']]) }}">Sil</a>
                                                 @endif
-                                                @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'])
-                                                    <a href="">Bu Cevap Doğru </a>
+                                                @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'] and \App\Models\Comments::isCorrectVariable($data[0]['id']))
+                                                    <a href="{{ route('comment.correct', ['id' => $v['id']]) }}">Bu Cevap
+                                                        Doğru </a>
                                                 @endif
                                             </div>
                                         </div>
