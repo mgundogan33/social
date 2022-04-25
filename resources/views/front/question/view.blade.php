@@ -52,7 +52,7 @@
                                                 @if ($v['userId'] != \Illuminate\Support\Facades\Auth::id())
                                                 <a href="{{route('comment.LikeOrDiskLike',['id'=>$v['id']])}}">Beğen ({{\App\Models\LikeComment::getCount($v['id'])}}) </a>
                                                 @else
-                                                <a href="">Sil</a>
+                                                <a href="{{route('comment.delete',['id'=>$v['id']])}}">Sil</a>
                                                 @endif
                                                 @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'])
                                                     <a href="">Bu Cevap Doğru </a>

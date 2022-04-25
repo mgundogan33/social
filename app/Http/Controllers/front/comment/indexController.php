@@ -58,4 +58,15 @@ class IndexController extends Controller
             abort(404);
         }
     }
+    public function delete($id)
+    {
+        $c = Comments::where('id', $id)->where('userId', Auth::id())->count();
+        if ($c != 0) {
+            $c = Comments::where('id', $id)->where('userId', Auth::id())->delete();
+            LikeComment::where('commentId', $id)->delete();
+            return redirect()->back();
+        } else {
+            abort(404);
+        }
+    }
 }

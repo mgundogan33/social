@@ -27,6 +27,7 @@ Route::group(['namespace' => 'front'], function () {
     Route::group(['namespace'=>'comment','as'=>'comment.','prefix'=>'comment'],function(){
         Route::post('/store/{id}',[App\Http\Controllers\front\comment\indexController::class, 'store'])->name('store');
         Route::get('/like/{id}',[App\Http\Controllers\front\comment\indexController::class,'LikeOrDiskLike'])->name('LikeOrDiskLike');
+        Route::get('/delete/{id}',[App\Http\Controllers\front\comment\indexController::class,'delete'])->name('delete');
     });
 
     Route::group(['namespace'=>'category','as'=>'category.','prefix'=>'kategori'],function (){
