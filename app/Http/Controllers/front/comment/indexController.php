@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Questions;
 use Illuminate\Http\Request;
 use App\Models\Comments;
+use App\Models\LikeComment;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -34,6 +35,25 @@ class IndexController extends Controller
             } else {
                 return redirect()->back()->with('status', 'Yorum Eklenemedi');
             }
+        } else {
+            abort(404);
+        }
+    }
+    public function LikeOrDiskLike($id)
+    {
+        $c = Comments::where('id', $id)->count();
+        if ($c != 0) {
+            $w = Comments::where('id', $id)->get();
+            if ($w[0]['userId'] == Auth::id()) {
+                return redirect()->back();
+            }
+            $control = LikeComment::where('commentId', $id)->where('userId', Auth::id())->count();
+            if ($control == 0) {
+                LikeComment::create(['commentId' => $id, 'userId' => Auth::id()]);
+            } else {
+                LikeComment::where('commentId', $id)->where('userId', Auth::id())->delete();
+            }
+            return redirect()->back();
         } else {
             abort(404);
         }

@@ -42,16 +42,19 @@
                                     <div class="col-md-10">
                                         <div class="media-body ">
                                             <div class="title">
-                                                <a
-                                                    class="mt-0">{{ \App\Models\User::getName($v['userId']) }}</a>
+                                                <a class="mt-0">{{ \App\Models\User::getName($v['userId']) }}</a>
                                                 {{ \App\Helper\Helpers::time_ago($v['created_at']) }}
                                             </div>
                                             <div class="description">
                                                 {!! $v['text'] !!}
                                             </div>
                                             <div class="detail">
-                                                <a href="">Beğen (0)</a>
-                                                @if (Illuminate\Support\Facades\Auth::id() == $data[0]['id'])
+                                                @if ($v['userId'] != \Illuminate\Support\Facades\Auth::id())
+                                                <a href="{{route('comment.LikeOrDiskLike',['id'=>$v['id']])}}">Beğen ({{\App\Models\LikeComment::getCount($v['id'])}}) </a>
+                                                @else
+                                                <a href="">Sil</a>
+                                                @endif
+                                                @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'])
                                                     <a href="">Bu Cevap Doğru </a>
                                                 @endif
                                             </div>
