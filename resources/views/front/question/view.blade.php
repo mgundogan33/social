@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="detail">
                                         <a href="">{{ \App\Models\Comments::getCount($data[0]['userId']) }} Yorum</a>-<a
-                                            href="">101 Görüntülenme</a>
+                                            href="">{{\App\Models\Visitor::getCount($data[0]['id'])}} Görüntülenme</a>
                                         @if (Auth::id() == $data[0]['userId'])
                                             <a href="">Düzenle</a>-<a href="">Sil</a>
                                         @endif

@@ -21,7 +21,7 @@
                                             {{ \App\Helper\Helpers::split($v['text'], 120) }}
                                         </div>
                                         <div class="detail">
-                                            <a href="">{{ \App\Models\Comments::getCount($v['id']) }} Yorum</a>-<a href="">101 Görüntülenme</a>-<a href="{{route('view',['selflink'=>$v['selflink'],'id'=>$v['id']]) }}">Devamını Oku</a>
+                                            <a href="">{{ \App\Models\Comments::getCount($v['id']) }} Yorum</a>-<a href="">{{\App\Models\Visitor::getCount($v['id'])}} Görüntülenme</a>-<a href="{{route('view',['selflink'=>$v['selflink'],'id'=>$v['id']]) }}">Devamını Oku</a>
                                         </div>
                                     </div>
                                 </div>

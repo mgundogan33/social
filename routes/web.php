@@ -32,5 +32,5 @@ Route::group(['namespace' => 'front'], function () {
         Route::get('/{selflink}',[App\Http\Controllers\front\category\indexController::class , 'index'])->name('index');
     });
 
-    Route::get('/{id}/{selflink}', [App\Http\Controllers\front\indexController::class, 'view'])->name('view');
+    Route::get('/{id}/{selflink}', [App\Http\Controllers\front\indexController::class, 'view'])->name('view')->middleware(['VisitorUser']);
 });

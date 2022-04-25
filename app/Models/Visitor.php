@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Visitor extends Model
 {
     use HasFactory;
-    protected $guarded=[];
+    protected $guarded = [];
+
+    static function getCount($questionId)
+    {
+        return Visitor::where('questionId', $questionId)->count();
+    }
 }
