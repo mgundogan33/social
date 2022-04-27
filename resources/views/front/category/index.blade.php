@@ -9,7 +9,7 @@
                     <ul class="list-unstyled">
                         @foreach($data as $k => $v)
                             <li class="media">
-                                {{-- <img class="mr-3" src="{{ \App\User::getPhoto($v['userId']) }}" alt="Generic placeholder image"> --}}
+                                <img class="" src="{{ \App\Models\User::resim($v['userId']) }}" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <div class="title">
                                         <a href="{{ route('view',['selflink'=>$v['selflink'],'id'=>$v['id']]) }}" class="mt-0">{{ $v['title'] }}</a> - {{ \App\Helper\Helpers::time_ago($v['created_at']) }}

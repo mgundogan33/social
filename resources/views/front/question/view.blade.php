@@ -59,7 +59,7 @@
                                                 @else
                                                     <a href="{{ route('comment.delete', ['id' => $v['id']]) }}">Sil</a>
                                                 @endif
-                                                @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'] and \App\Models\Comments::isCorrectVariable($data[0]['id']))
+                                                @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'] and \App\Models\Comments::isCorrectVariable($data[0]['id'] == 0))
                                                     <a href="{{ route('comment.correct', ['id' => $v['id']]) }}">Bu Cevap
                                                         Doğru </a>
                                                 @endif

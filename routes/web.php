@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\front\question\indexController;
+use App\Http\Controllers\front\settings\indexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +24,20 @@ Route::group(['namespace' => 'front'], function () {
         Route::get('/create', [App\Http\Controllers\front\question\indexController::class, 'create'])->name('create');
         Route::post('/store', [App\Http\Controllers\front\question\indexController::class, 'store'])->name('store');
     });
-    Route::group(['namespace'=>'comment','as'=>'comment.','prefix'=>'comment'],function(){
-        Route::post('/store/{id}',[App\Http\Controllers\front\comment\indexController::class, 'store'])->name('store');
-        Route::get('/like/{id}',[App\Http\Controllers\front\comment\indexController::class,'LikeOrDiskLike'])->name('LikeOrDiskLike');
-        Route::get('/delete/{id}',[App\Http\Controllers\front\comment\indexController::class,'delete'])->name('delete');
-        Route::get('/correct/{id}',[App\Http\Controllers\front\comment\indexController::class,'correct'])->name('correct');
-
+    Route::group(['namespace' => 'comment', 'as' => 'comment.', 'prefix' => 'comment'], function () {
+        Route::post('/store/{id}', [App\Http\Controllers\front\comment\indexController::class, 'store'])->name('store');
+        Route::get('/like/{id}', [App\Http\Controllers\front\comment\indexController::class, 'LikeOrDiskLike'])->name('LikeOrDiskLike');
+        Route::get('/delete/{id}', [App\Http\Controllers\front\comment\indexController::class, 'delete'])->name('delete');
+        Route::get('/correct/{id}', [App\Http\Controllers\front\comment\indexController::class, 'correct'])->name('correct');
     });
 
-    Route::group(['namespace'=>'category','as'=>'category.','prefix'=>'kategori'],function (){
-        Route::get('/{selflink}',[App\Http\Controllers\front\category\indexController::class , 'index'])->name('index');
+    Route::group(['namespace' => 'category', 'as' => 'category.', 'prefix' => 'kategori'], function () {
+        Route::get('/{selflink}', [App\Http\Controllers\front\category\indexController::class, 'index'])->name('index');
+    });
+
+    Route::group(['namespace' => 'settings', 'as' => 'settings.', 'prefix' => 'ayarlar'], function () {
+        Route::get('/', [App\Http\Controllers\front\settings\indexController::class, 'index'])->name('index');
+        Route::post('/', [App\Http\Controllers\front\settings\indexController::class, 'store'])->name('store');
     });
 
     Route::get('/{id}/{selflink}', [App\Http\Controllers\front\indexController::class, 'view'])->name('view')->middleware(['VisitorUser']);

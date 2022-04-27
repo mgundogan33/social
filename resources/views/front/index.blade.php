@@ -6,11 +6,14 @@
             <div class="col-md-8">
                 <ul class="list-unstyled">
                     @foreach ($data as $key => $v)
+
+
                         <li class="media">
                             <div class="row">
-                                <div class="col-md-2">
-                                    <img class="mr-3 resim "
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPiUWsa1fBVyoxphpF6We9n4v4PUwERqE0IA&usqp=CAU"alt="Generic placeholder image">
+                                <div class="col-md-2 vurgun">
+
+                                  <img class="mr-3 resim"
+                                src="{{ \App\Models\User::resim($v['userId']) }}" alt="Generic placeholder image">
                                 </div>
                                 <div class="col-md-10">
                                     <div class="media-body ">

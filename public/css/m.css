@@ -19,3 +19,6 @@ a.title {display: block;}
 .tag--list {padding: 5px; background: #bcb5b5; border-radius: 5px;}
 .detail{margin-top: 5px;background-color:rgb(234, 224, 224) ;padding: 5px;}
 .isCorrect{padding: 3px; border: 2px dotted green;}
+.media img{width: 70px;
+    height: 70px;
+    border-radius: 40px;}
