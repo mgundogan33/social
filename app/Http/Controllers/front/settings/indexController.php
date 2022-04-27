@@ -32,4 +32,26 @@ class indexController extends Controller
             return redirect()->back()->with('status', 'Ayarlar Değiştirilemedi');
         }
     }
+    public function password()
+    {
+        return view('front.settings.password');
+    }
+
+    public function passwordStore(Request $request)
+    {
+        $request->validate(['currentpassword' => 'required', 'password' => 'required', 'retrypassword' => 'required']);
+
+        $all = $request->except('_token');
+
+        if (md5($all['currentpassword']) == Auth::user()->password) {
+            if ($all['password'] == $all['retrypassword']) {
+                User::where('id', Auth::id())->update(['password' => md5($all['password'])]);
+                return redirect()->back()->with('status', 'Şifre Değiştirildi');
+            } else {
+                return redirect()->back()->with('status', 'Şifreler Uyumsuz');
+            }
+        } else {
+            return redirect()->back()->with('status', 'Mevcut Şifre Hatalı');
+        }
+    }
 }

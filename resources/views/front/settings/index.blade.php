@@ -13,6 +13,9 @@
                         <form enctype="multipart/form-data" method="POST" action="{{ route('settings.store') }}">
                             @csrf
                             <div class="form-group row">
+                                <img style="width:120px; height:120px" src="{{\App\Models\User::resim(\Illuminate\Support\Facades\Auth::id())}}" alt="">
+                            </div>
+                            <div class="form-group row">
                                 <div class="col-md-12">
                                     <input type="file" name="photo" class="form-group">
                                 </div>
@@ -43,7 +46,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-12 mt-2">
                                     <button type="submit" class="btn btn-primary">
-                                        Cevabı Gönder
+                                       Güncelle
                                     </button>
 
                                 </div>
