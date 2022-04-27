@@ -25,13 +25,27 @@
                                         <a href="">{{ \App\Models\Comments::getCount($data[0]['userId']) }} Yorum</a>-<a
                                             href="">{{ \App\Models\Visitor::getCount($data[0]['id']) }} Görüntülenme</a>
                                         @if (Auth::id() == $data[0]['userId'])
-                                            <a href="{{route('question.edit',['id'=>$data[0]['id']])}}">Düzenle</a>-<a href="{{route('question.delete',['id'=>$data[0]['id']])}}">Sil</a>
+                                            <a href="{{ route('question.edit', ['id' => $data[0]['id']]) }}"><i
+                                                    class="fa-solid fa-edit"></i></a>-<a
+                                                href="{{ route('question.delete', ['id' => $data[0]['id']]) }}"><i
+                                                    class="fa-solid fa-trash"></i></a>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
+                    <div class="category--list">
+                        @foreach (\App\Models\QuestionsCategory::getCategoryList($data[0]['id']) as $k => $v)
+                            <a
+                                href="{{ route('category.index', ['selflink' => $v['selflink']]) }}">{{ $v['name'] }}</a>
+                        @endforeach
+                    </div>
+                    <div class="category--list">
+                        @foreach (\App\Models\QuestionsTags::where('questionId', $data[0]['id'])->get() as $k => $v)
+                            <a href="#">{{ $v['name'] }}</a>
+                        @endforeach
+                    </div>
                 </ul>
                 <div class="category--title bg-success d-block text-center p-2 text-white">Cevaplar</div>
                 @if (\App\Models\Comments::getCount($data[0]['id']) != 0)
@@ -54,14 +68,19 @@
                                             </div>
                                             <div class="detail">
                                                 @if ($v['userId'] != \Illuminate\Support\Facades\Auth::id())
+                                                    <img class="mr-3 resim"
+                                                        src="{{ \App\Models\User::resim($v['userId']) }}"
+                                                        alt="Generic placeholder image">
                                                     <a href="{{ route('comment.LikeOrDiskLike', ['id' => $v['id']]) }}">Beğen
-                                                        {{ \App\Models\LikeComment::getCount($v['id']) == 0 ?? '('.\App\Models\LikeComment::getCount($v['id']).')' }}      </a>
+                                                        {{ \App\Models\LikeComment::getCount($v['id']) == 0 ?? '(' . \App\Models\LikeComment::getCount($v['id']) . ')' }}
+                                                    </a>
                                                 @else
-                                                    <a href="{{ route('comment.delete', ['id' => $v['id']]) }}">Sil</a>
+                                                    <a href="{{ route('comment.delete', ['id' => $v['id']]) }}"><i
+                                                            class="fa-solid fa-trash"></i></a>
                                                 @endif
                                                 @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'] and \App\Models\Comments::isCorrectVariable($data[0]['id'] == 0))
-                                                    <a href="{{ route('comment.correct', ['id' => $v['id']]) }}">Bu Cevap
-                                                        Doğru </a>
+                                                    <a href="{{ route('comment.correct', ['id' => $v['id']]) }}"><i
+                                                            class="fa-solid fa-check"></i></a>
                                                 @endif
                                             </div>
                                         </div>

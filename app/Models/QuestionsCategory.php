@@ -24,4 +24,10 @@ class QuestionsCategory extends Model
             return false;
         }
     }
+    static function getCategoryList($questionId)
+    {
+        return Category::leftJoin('questions_categories', 'questions_categories.category', '=', 'categories.id')
+            ->where('questions_categories.questionId', $questionId)
+            ->select(['categories.*'])->get();
+    }
 }

@@ -14,11 +14,13 @@
 .m-checkbox {padding: 8px 10px; background-color: grey; margin-bottom: 5px;border-radius: 10px;}
 .media {background-color: white; padding: 10px;box-shadow: 1px 1px 1px 1px #eee;}
 .resim {width: 90px;height:90px;}
-a.title {display: block;}
+.title {display: block;}
+.title a{color: black;font-size: 20px;text-decoration: none;}
 .media-body.description {margin-bottom: 10px;}
 .tag--list {padding: 5px; background: #bcb5b5; border-radius: 5px;}
-.detail{margin-top: 5px;background-color:rgb(234, 224, 224) ;padding: 5px;}
+.detail{margin-top: 5px;background-color:rgb(211, 207, 207) ;padding: 5px;border-radius: 15px;}
+.detail a{text-decoration: none;color: black;}
 .isCorrect{padding: 3px; border: 2px dotted green;}
-.media img{width: 70px;
-    height: 70px;
-    border-radius: 40px;}
+.media img{width: 70px;height: 70px;border-radius: 40px;}
+.category--list{padding: 5px;background-color: white;box-shadow: 1px 1px 1px 1px rgb(202, 200, 200);margin-top: 15px;}
+.category--list a{padding: 5px;background: #64b5f6;color:black;text-decoration: none;border-radius: 2px;}

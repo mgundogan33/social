@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
+                <h3>Son Sorular</h3>
                 <ul class="list-unstyled">
                     @foreach ($data as $key => $v)
 
