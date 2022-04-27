@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\front\question;
 
 use App\Helper\Helpers;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Comments;
 use App\Models\Questions;
-use App\Models\QuestionsCategory;
-use App\Models\QuestionsTags;
 use Illuminate\Http\Request;
+use App\Models\QuestionsTags;
+use App\Models\QuestionsCategory;
+use App\Http\Controllers\Controller;
+use App\Models\Visitor;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Question\Question;
 
@@ -98,6 +100,27 @@ class indexController extends Controller
 
             Questions::where('id', $id)->update($all);
             return redirect()->back()->with('status', 'Bilgiler Değiştirildi');
+        } else {
+            abort(404);
+        }
+    }
+    public function delete($id)
+    {
+        $c = Questions::where('id', $id)->where('userId',Auth::id())->count();
+        if ($c != 0) {
+            // 1ci soruyu sil
+            Questions::where('id', $id)->where('userId', Auth::id())->delete();
+            // 2 kategoriyi sil
+            QuestionsCategory::where('questionId', $id)->delete();
+            // 3 etiketleri sil
+            QuestionsTags::where('questionId', $id)->delete();
+            // 4 Yorumlar sil
+            Comments::where('questionId', $id)->delete();
+            // 5 görüntülenme sil
+            Visitor::where('questionId', $id)->delete();
+
+            return redirect('/');
+
         } else {
             abort(404);
         }
