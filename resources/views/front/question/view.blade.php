@@ -16,14 +16,17 @@
                             <div class="col-md-10">
                                 <div class="media-body">
                                     <div class="title">
-                                        <a href=""
-                                            class="mt-0">{{ $data[0]['title'] }}</a>{{ \App\Helper\Helpers::time_ago($data[0]['created_at']) }}
+                                        <a href="" class="mt-0">{{ $data[0]['title'] }}</a>
+                                        @foreach (\App\Models\QuestionsCategory::getCategoryList($data[0]['id']) as $k => $v)
+                                            <span class="category--item" >{{ $v['name'] }}</a>
+                                        @endforeach
                                     </div>
                                     <div class="description">{{ $data[0]['text'] }}
                                     </div>
                                     <div class="detail">
                                         <a href="">{{ \App\Models\Comments::getCount($data[0]['userId']) }} Yorum</a>-<a
                                             href="">{{ \App\Models\Visitor::getCount($data[0]['id']) }} Görüntülenme</a>
+                                        -{{ \App\Helper\Helpers::time_ago($data[0]['created_at']) }}
                                         @if (Auth::id() == $data[0]['userId'])
                                             <a href="{{ route('question.edit', ['id' => $data[0]['id']]) }}"><i
                                                     class="fa-solid fa-edit"></i></a>-<a
@@ -35,12 +38,7 @@
                             </div>
                         </div>
                     </li>
-                    <div class="category--list">
-                        @foreach (\App\Models\QuestionsCategory::getCategoryList($data[0]['id']) as $k => $v)
-                            <a
-                                href="{{ route('category.index', ['selflink' => $v['selflink']]) }}">{{ $v['name'] }}</a>
-                        @endforeach
-                    </div>
+
                     <div class="category--list">
                         @foreach (\App\Models\QuestionsTags::where('questionId', $data[0]['id'])->get() as $k => $v)
                             <a href="#">{{ $v['name'] }}</a>
@@ -83,6 +81,7 @@
                                                             class="fa-solid fa-check"></i></a>
                                                 @endif
                                             </div>
+                                            <hr>
                                         </div>
                                     </div>
                                 </div>
