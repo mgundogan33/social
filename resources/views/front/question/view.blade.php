@@ -18,7 +18,7 @@
                                     <div class="title">
                                         <a href="" class="mt-0">{{ $data[0]['title'] }}</a>
                                         @foreach (\App\Models\QuestionsCategory::getCategoryList($data[0]['id']) as $k => $v)
-                                            <span class="category--item" >{{ $v['name'] }}</a>
+                                            <span class="category--item">{{ $v['name'] }}</a>
                                         @endforeach
                                     </div>
                                     <div class="description">{{ $data[0]['text'] }}
@@ -45,7 +45,7 @@
                         @endforeach
                     </div>
                 </ul>
-                <div class="category--title bg-success d-block text-center p-2 text-white">Cevaplar</div>
+                <h3>Cevaplar</h3>
                 @if (\App\Models\Comments::getCount($data[0]['id']) != 0)
                     <ul class="list-unstyled">
                         @foreach ($comments as $k => $v)
@@ -120,6 +120,38 @@
                 </div>
             </div>
             <div class="col-md-4">
+
+                <div class="team-card-style-3 mx-auto" style="margin-bottom: 20px">
+                    <div class="team-thumb"><img src="{{ \App\Models\User::resim($data[0]['userId']) }}"
+                            alt="Author Picture">
+                    </div>
+                    <h4 class="team-name">{{ \App\Models\User::getName($data[0]['userId']) }}</h4>
+                    <span class="team-contact-link">
+                        <i class="fe-icon-phone"></i>&nbsp;Toplam
+                        {{ \App\Models\Questions::where('userId', $data[0]['userId'])->count() }} Soru Soruldu.
+                    </span>
+                        <span class="team-contact-link">
+                            <i class="fe-icon-mail"></i>&nbsp;Toplam
+                            {{ \App\Models\Comments::where('userId', $data[0]['userId'])->count() }} Cevap Verildi.
+                        </span>
+                            <div class="team-social-bar-wrap">
+                                <div class="team-social-bar">
+                                    <a class="social-btn sb-style-1 sb-twitter" href="#">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a class="social-btn sb-style-1 sb-github" href="#">
+                                        <i class="fa fa-github"></i>
+                                    </a>
+                                    <a class="social-btn sb-style-1 sb-stackoverflow" href="#">
+                                        <i class="fa fa-linkedin"></i>
+                                    </a>
+                                    <a class="social-btn sb-style-1 sb-skype" href="#">
+                                        <i class="fa fa-skype"></i>
+                                    </a>
+                                </div>
+                            </div>
+                </div>
+
                 @include('sidebar.app')
             </div>
         </div>

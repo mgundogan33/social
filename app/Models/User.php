@@ -55,6 +55,6 @@ class User extends Authenticatable
     static function resim($id)
     {
         $w = User::select('photo')->whereId($id)->get()['0']['photo'];
-        return $w != '' ? asset($w) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPiUWsa1fBVyoxphpF6We9n4v4PUwERqE0IA&usqp=CAU';
+        return $w != '' ? asset($w) : 'https://bootdey.com/img/Content/avatar/avatar7.png';
     }
 }
