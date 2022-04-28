@@ -125,7 +125,8 @@
                     <div class="team-thumb"><img src="{{ \App\Models\User::resim($data[0]['userId']) }}"
                             alt="Author Picture">
                     </div>
-                    <h4 class="team-name">{{ \App\Models\User::getName($data[0]['userId']) }}</h4>
+                    <a href="{{route('user.index',['id'=>$data[0]['userId']])}}" class="team-name">
+                        {{ \App\Models\User::getName($data[0]['userId']) }}</a>
                     <span class="team-contact-link">
                         <i class="fe-icon-phone"></i>&nbsp;Toplam
                         {{ \App\Models\Questions::where('userId', $data[0]['userId'])->count() }} Soru Soruldu.
