@@ -125,7 +125,7 @@
                     <div class="team-thumb"><img src="{{ \App\Models\User::resim($data[0]['userId']) }}"
                             alt="Author Picture">
                     </div>
-                    <a href="{{route('user.index',['id'=>$data[0]['userId']])}}" class="team-name">
+                    <a href="{{ route('user.index',['id' => $data[0]['userId']]) }}" class="team-name">
                         {{ \App\Models\User::getName($data[0]['userId']) }}</a>
                     <span class="team-contact-link">
                         <i class="fe-icon-phone"></i>&nbsp;Toplam
@@ -138,16 +138,16 @@
                             <div class="team-social-bar-wrap">
                                 <div class="team-social-bar">
                                     <a class="social-btn sb-style-1 sb-twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
+                                        <i class="fa-brands fa-twitter"></i>
                                     </a>
                                     <a class="social-btn sb-style-1 sb-github" href="#">
-                                        <i class="fa fa-github"></i>
+                                        <i class="fa-brands fa-github"></i>
                                     </a>
                                     <a class="social-btn sb-style-1 sb-stackoverflow" href="#">
-                                        <i class="fa fa-linkedin"></i>
+                                        <i class="fa-brands fa-linkedin"></i>
                                     </a>
                                     <a class="social-btn sb-style-1 sb-skype" href="#">
-                                        <i class="fa fa-skype"></i>
+                                        <i class="fa-brands fa-skype"></i>
                                     </a>
                                 </div>
                             </div>
