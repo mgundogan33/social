@@ -92,131 +92,40 @@
                                 <h5 class="mb-3">Hakkımda</h5>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {!! str_replace("\n",'<br>' , $data[0]['bio']) !!}
+                                        {!! str_replace("\n", '<br>', $data[0]['bio']) !!}
                                     </div>
                                 </div>
                                 <!--/row-->
                             </div>
                             <div class="tab-pane" id="messages">
-                                <div class="alert alert-info alert-dismissible" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <div class="alert-icon">
-                                        <i class="icon-info"></i>
-                                    </div>
-                                    <div class="alert-message">
-                                        <span><strong>Info!</strong> Lorem Ipsum is simply dummy text.</span>
-                                    </div>
-                                </div>
                                 <table class="table table-hover table-striped">
                                     <tbody>
+                                        @foreach ($questions as $k=>$v)
                                         <tr>
                                             <td>
-                                                <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a
-                                                link to the latest summary report from the..
+                                                <span class="float-right font-weight-bold">{{\App\Helper\Helpers::time_ago($v['created_at'])}}</span>
+                                                <a href="{{route('view',['id'=>$v['id'],'selflink'=>$v['selflink']])}}">{{$v['title']}}</a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="float-right font-weight-bold">Yesterday</span> There has been a
-                                                request on your account since that was..
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="float-right font-weight-bold">9/10</span> Porttitor vitae
-                                                ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt
-                                                ullamcorper eros eget luctus.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the
-                                                fix for tibulum tincidunt ullamcorper eros.
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div class="tab-pane" id="edit">
-                                <form>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="Mark">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="Jhonsan">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="email" value="mark@example.com">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="file">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Website</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="url" value="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="" placeholder="Street">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label"></label>
-                                        <div class="col-lg-6">
-                                            <input class="form-control" type="text" value="" placeholder="City">
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <input class="form-control" type="text" value="" placeholder="State">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="jhonsanmark">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="password" value="11111122333">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                                        <div class="col-lg-9">
-                                            <input class="form-control" type="password" value="11111122333">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label"></label>
-                                        <div class="col-lg-9">
-                                            <input type="reset" class="btn btn-secondary" value="Cancel">
-                                            <input type="button" class="btn btn-primary" value="Save Changes">
-                                        </div>
-                                    </div>
-                                </form>
+                                <table class="table table-hover table-striped">
+                                    <tbody>
+                                        @foreach ($comments as $k=>$v)
+                                        <tr>
+                                            <td>
+                                                <span class="float-right font-weight-bold">{{\App\Helper\Helpers::time_ago($v['created_at'])}}</span>
+                                                <a href="{{route('view',['id'=>$v['questionId'],'selflink'=>\App\Models\Questions::getSelflink($v['questionId'])])}}">{{$v['text']}}</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
