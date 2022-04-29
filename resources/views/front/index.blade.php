@@ -16,7 +16,7 @@
                                     <div class="media-body ">
                                         <div class="title">
                                             <a href="{{route('view',['selflink'=>$v['selflink'],'id'=>$v['id']]) }}" class="mt-0">{{ $v['title'] }}</a>
-                                             @foreach (\App\Models\QuestionsCategory::getCategoryList($data[0]['id']) as $k2=>$v2 )
+                                             @foreach (\App\Models\QuestionsCategory::getCategoryList($v['id']) as $k2=>$v2 )
                                                  <span class="category--item">{{$v2['name']}}</span>
                                              @endforeach
                                         </div>

@@ -153,7 +153,16 @@
                             </div>
                 </div>
 
-                @include('sidebar.app')
+                <h3>Benzer Sorular</h3>
+                <ul class="list-group">
+                    @foreach (\App\Models\Questions::likeQuestions($data[0]['id']) as $key => $v)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{-- <a href="/kategori/{{ strtolower($v['name']) }}">{{ $v['name'] }}</a> --}}
+                                   <a href="{{route('view',['id'=>$v['id'],'selflink'=>$v['selflink']])}}">{{$v['title']}}</a>
+                        </li>
+                    @endforeach
+                </ul>
+
             </div>
         </div>
     </div>

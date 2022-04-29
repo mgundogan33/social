@@ -15,4 +15,18 @@ class Questions extends Model
         $data = Questions::where('id', $questionId)->get();
         return $data[0]['selflink'];
     }
+    static function likeQuestions($questionId)
+    {
+        $getQuestionsCategory = QuestionsCategory::where('questionId', $questionId)->get();
+
+        $data = Questions::leftJoin('questions_categories', 'questions.id', '=', 'questions_categories.questionId')
+            ->where('questions.id', '!=', $questionId)
+            ->where(function ($data) use ($getQuestionsCategory) {
+                foreach ($getQuestionsCategory as $k => $v) {
+                    $data->orWhere('questions_categories.category', $v['category']);
+                }
+            });
+        $data = $data->select(['questions.*'])->orderBy('id', 'desc')->limit(5)->get();
+        return $data;
+    }
 }
