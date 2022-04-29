@@ -15,6 +15,13 @@ class Questions extends Model
         $data = Questions::where('id', $questionId)->get();
         return $data[0]['selflink'];
     }
+
+    static function getTitle($questionId)
+    {
+        $data = Questions::where('id', $questionId)->get();
+        return $data[0]['title'];
+    }
+
     static function likeQuestions($questionId)
     {
         $getQuestionsCategory = QuestionsCategory::where('questionId', $questionId)->get();

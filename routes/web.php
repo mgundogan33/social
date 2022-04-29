@@ -38,6 +38,10 @@ Route::group(['namespace' => 'front'], function () {
     Route::group(['namespace' => 'search', 'as' => 'search.', 'prefix' => 'ara'], function () {
         Route::get('/', [App\Http\Controllers\front\search\indexController::class, 'index'])->name('index');
     });
+    Route::group(['namespace' => 'save', 'as' => 'save.', 'prefix' => 'kaydet'], function () {
+        Route::get('/', [App\Http\Controllers\front\save\indexController::class, 'index'])->name('index');
+        Route::get('/soru/{id}', [App\Http\Controllers\front\save\indexController::class, 'store'])->name('store');
+    });
 
     Route::group(['namespace' => 'comment', 'as' => 'comment.', 'prefix' => 'comment'], function () {
         Route::post('/store/{id}', [App\Http\Controllers\front\comment\indexController::class, 'store'])->name('store');

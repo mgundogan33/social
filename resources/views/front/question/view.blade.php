@@ -27,6 +27,13 @@
                                         <a href="">{{ \App\Models\Comments::getCount($data[0]['userId']) }} Yorum</a>-<a
                                             href="">{{ \App\Models\Visitor::getCount($data[0]['id']) }} Görüntülenme</a>
                                         -{{ \App\Helper\Helpers::time_ago($data[0]['created_at']) }}
+                                        - <a href="{{ route('save.store', ['id' => $data[0]['id']]) }}">
+                                            @if (\App\Models\SaveQuestion::isSave($data[0]['id']))
+                                                Soruyu Kayıttan Çıkar
+                                            @else
+                                                Soruyu Kaydet
+                                            @endif
+                                        </a>
                                         @if (Auth::id() == $data[0]['userId'])
                                             <a href="{{ route('question.edit', ['id' => $data[0]['id']]) }}"><i
                                                     class="fa-solid fa-edit"></i></a>-<a
@@ -125,32 +132,32 @@
                     <div class="team-thumb"><img src="{{ \App\Models\User::resim($data[0]['userId']) }}"
                             alt="Author Picture">
                     </div>
-                    <a href="{{ route('user.index',['id' => $data[0]['userId']]) }}" class="team-name">
+                    <a href="{{ route('user.index', ['id' => $data[0]['userId']]) }}" class="team-name">
                         {{ \App\Models\User::getName($data[0]['userId']) }}</a>
                     <span class="team-contact-link">
                         <i class="fe-icon-phone"></i>&nbsp;Toplam
                         {{ \App\Models\Questions::where('userId', $data[0]['userId'])->count() }} Soru Soruldu.
                     </span>
-                        <span class="team-contact-link">
-                            <i class="fe-icon-mail"></i>&nbsp;Toplam
-                            {{ \App\Models\Comments::where('userId', $data[0]['userId'])->count() }} Cevap Verildi.
-                        </span>
-                            <div class="team-social-bar-wrap">
-                                <div class="team-social-bar">
-                                    <a class="social-btn sb-style-1 sb-twitter" href="#">
-                                        <i class="fa-brands fa-twitter"></i>
-                                    </a>
-                                    <a class="social-btn sb-style-1 sb-github" href="#">
-                                        <i class="fa-brands fa-github"></i>
-                                    </a>
-                                    <a class="social-btn sb-style-1 sb-stackoverflow" href="#">
-                                        <i class="fa-brands fa-linkedin"></i>
-                                    </a>
-                                    <a class="social-btn sb-style-1 sb-skype" href="#">
-                                        <i class="fa-brands fa-skype"></i>
-                                    </a>
-                                </div>
-                            </div>
+                    <span class="team-contact-link">
+                        <i class="fe-icon-mail"></i>&nbsp;Toplam
+                        {{ \App\Models\Comments::where('userId', $data[0]['userId'])->count() }} Cevap Verildi.
+                    </span>
+                    <div class="team-social-bar-wrap">
+                        <div class="team-social-bar">
+                            <a class="social-btn sb-style-1 sb-twitter" href="#">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                            <a class="social-btn sb-style-1 sb-github" href="#">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                            <a class="social-btn sb-style-1 sb-stackoverflow" href="#">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                            <a class="social-btn sb-style-1 sb-skype" href="#">
+                                <i class="fa-brands fa-skype"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <h3>Benzer Sorular</h3>
@@ -158,7 +165,8 @@
                     @foreach (\App\Models\Questions::likeQuestions($data[0]['id']) as $key => $v)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{-- <a href="/kategori/{{ strtolower($v['name']) }}">{{ $v['name'] }}</a> --}}
-                                   <a href="{{route('view',['id'=>$v['id'],'selflink'=>$v['selflink']])}}">{{$v['title']}}</a>
+                            <a
+                                href="{{ route('view', ['id' => $v['id'], 'selflink' => $v['selflink']]) }}">{{ $v['title'] }}</a>
                         </li>
                     @endforeach
                 </ul>
