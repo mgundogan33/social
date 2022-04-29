@@ -33,8 +33,12 @@ Route::group(['namespace' => 'front'], function () {
         Route::get('/{selflink}', [App\Http\Controllers\front\category\indexController::class, 'index'])->name('index');
     });
     Route::group(['namespace' => 'user', 'as' => 'user.', 'prefix' => 'kullanici'], function () {
-        Route::get('/{id}',[App\Http\Controllers\front\user\indexController::class, 'index'])->name('index');
+        Route::get('/{id}', [App\Http\Controllers\front\user\indexController::class, 'index'])->name('index');
     });
+    Route::group(['namespace' => 'search', 'as' => 'search.', 'prefix' => 'ara'], function () {
+        Route::get('/', [App\Http\Controllers\front\search\indexController::class, 'index'])->name('index');
+    });
+
     Route::group(['namespace' => 'comment', 'as' => 'comment.', 'prefix' => 'comment'], function () {
         Route::post('/store/{id}', [App\Http\Controllers\front\comment\indexController::class, 'store'])->name('store');
         Route::get('/like/{id}', [App\Http\Controllers\front\comment\indexController::class, 'LikeOrDiskLike'])->name('LikeOrDiskLike');
