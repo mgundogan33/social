@@ -41,7 +41,7 @@
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label for="">Sorunuz</label>
-                                    <textarea name="text" id="" class="form-control" cols="30" rows="10">{{ $data[0]['text'] }}</textarea>
+                                    <textarea name="text" id="texteditor" class="form-control tinymce" cols="30" rows="10">{{ $data[0]['text'] }}</textarea>
                                 </div>
                             </div>
 
@@ -70,9 +70,19 @@
     </div>
 @endsection
 @section('footer')
-    <script src="{{ asset('plugins/tokenfield/bootstrap-tokenfield.js') }}"></script>
-    <script src="{{ asset('plugins/tokenfield/bootstrap-tokenfield.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugin/tinymce/tinymce.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('plugin/tinymce/init-tinymce.js') }}"></script>
     <script>
-        $("#tokenfield").tokenfield();
+        $("#get-data-form").submit(function(e) {
+            var content = tinymce.get("texteditor").getContent();
+            $("#data-container").html(content);
+            return false;
+        });
     </script>
+    <style>
+        #mceu_33-body {
+            display: none !important;
+        }
+
+    </style>
 @endsection
