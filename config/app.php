@@ -1,5 +1,5 @@
 <?php
-
+define('NOTIFICATIONS_COMMENT',0);
 use Illuminate\Support\Facades\Facade;
 
 return [

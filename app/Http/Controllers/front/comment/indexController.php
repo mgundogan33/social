@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\front\comment;
 
-use App\Http\Controllers\Controller;
-use App\Models\Questions;
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Comments;
+use App\Models\Questions;
 use App\Models\LikeComment;
+use Illuminate\Http\Request;
+use App\Helper\NotificationsHelper;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -31,6 +33,8 @@ class IndexController extends Controller
             $create = Comments::create($all);
 
             if ($create) {
+                $text = User::getName(Auth::id()) . 'kişisi' . $w[0]['title'] . 'Sorunuza cevap yazdı';
+                NotificationsHelper::Insert($w[0]['userId'], $text, NOTIFICATIONS_COMMENT);
                 return redirect()->back()->with('status', 'Yorum Başarı ile Eklendi');
             } else {
                 return redirect()->back()->with('status', 'Yorum Eklenemedi');

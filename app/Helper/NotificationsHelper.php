@@ -1,5 +1,6 @@
 <?php
 namespace App\Helper;
+use App\Models\Notifications;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationsHelper
@@ -12,7 +13,7 @@ class NotificationsHelper
                 'type' => $type,
                 'receiverUserId' => $receiverId,
                 'text' => $text,
-                'isRead'=>1
+                // 'isRead'=>1
             ];
 
             Notifications::create($array);
