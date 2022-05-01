@@ -13,7 +13,7 @@ class NotificationsHelper
                 'type' => $type,
                 'receiverUserId' => $receiverId,
                 'text' => $text,
-                // 'isRead'=>1
+                'isRead'=>1
             ];
 
             Notifications::create($array);

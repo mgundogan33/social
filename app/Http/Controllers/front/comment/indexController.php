@@ -54,6 +54,8 @@ class IndexController extends Controller
             $control = LikeComment::where('commentId', $id)->where('userId', Auth::id())->count();
             if ($control == 0) {
                 LikeComment::create(['commentId' => $id, 'userId' => Auth::id()]);
+                $text = User::getName(Auth::id()) . 'kişisi"' . $w[0]['text'] . '"Yorumu Beğendi.';
+                NotificationsHelper::Insert($w[0]['userId'], $text, NOTIFICATIONS_LIKE);
             } else {
                 LikeComment::where('commentId', $id)->where('userId', Auth::id())->delete();
             }

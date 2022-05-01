@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front\settings;
 
 use App\Helper\fileUpload;
 use App\Http\Controllers\Controller;
+use App\Models\Notifications;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,5 +54,10 @@ class indexController extends Controller
         } else {
             return redirect()->back()->with('status', 'Mevcut Şifre Hatalı');
         }
+    }
+    public function notifications(){
+        $data=Notifications::where('receiverUserId',Auth::id())->orderBy('id','desc')->paginate(10);
+        Notifications::where('receiverUserId',Auth::id())->update(['isRead'=>0]);
+        return view('front.settings.notifications',['data'=>$data]);
     }
 }

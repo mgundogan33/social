@@ -53,6 +53,9 @@ Route::group(['namespace' => 'front'], function () {
     Route::group(['namespace' => 'settings', 'as' => 'settings.', 'prefix' => 'ayarlar'], function () {
         Route::get('/', [App\Http\Controllers\front\settings\indexController::class, 'index'])->name('index');
         Route::post('/', [App\Http\Controllers\front\settings\indexController::class, 'store'])->name('store');
+
+        Route::get('/bildirimler', [App\Http\Controllers\front\settings\indexController::class, 'notifications'])->name('notifications');
+
         Route::get('/password', [App\Http\Controllers\front\settings\indexController::class, 'password'])->name('password');
         Route::post('/password', [App\Http\Controllers\front\settings\indexController::class, 'passwordStore'])->name('passwordStore');
     });
