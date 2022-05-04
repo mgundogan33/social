@@ -36,7 +36,7 @@ Route::group(['namespace' => 'front'], function () {
         Route::get('/{selflink}', [App\Http\Controllers\front\category\indexController::class, 'index'])->name('index');
     });
     Route::group(['namespace' => 'user', 'as' => 'user.', 'prefix' => 'kullanici'], function () {
-        Route::get('/hepsi',[App\Http\Controllers\front\user\indexController::class, 'all'])->name('all');
+        Route::get('/hepsi', [App\Http\Controllers\front\user\indexController::class, 'all'])->name('all');
         Route::get('/{id}', [App\Http\Controllers\front\user\indexController::class, 'index'])->name('index');
     });
     Route::group(['namespace' => 'search', 'as' => 'search.', 'prefix' => 'ara'], function () {
@@ -65,4 +65,7 @@ Route::group(['namespace' => 'front'], function () {
     });
 
     Route::get('/{id}/{selflink}', [App\Http\Controllers\front\indexController::class, 'view'])->name('view')->middleware(['VisitorUser']);
+});
+Route::group(['namespace' => 'tags', 'as' => 'tags', 'prefix' => 'etiket'], function () {
+    Route::get('/', [\App\Http\Controllers\front\tags\indexController::class, 'index'])->name('index');
 });
