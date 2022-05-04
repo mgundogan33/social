@@ -23,7 +23,7 @@ Route::group(['namespace' => 'front'], function () {
     Route::get('/cozumlenmis', [App\Http\Controllers\front\indexController::class, 'cozumlenmis'])->name('cozumlenmis');
 
 
-    Route::group(['namespace' => 'question', 'as' => 'question.', 'prefix' => 'question'], function () {
+    Route::group(['namespace' => 'question', 'as' => 'question.', 'prefix' => 'question','middleware'=>['auth']], function () {
         Route::get('/create', [App\Http\Controllers\front\question\indexController::class, 'create'])->name('create');
         Route::post('/store', [App\Http\Controllers\front\question\indexController::class, 'store'])->name('store');
 
@@ -42,19 +42,19 @@ Route::group(['namespace' => 'front'], function () {
     Route::group(['namespace' => 'search', 'as' => 'search.', 'prefix' => 'ara'], function () {
         Route::get('/', [App\Http\Controllers\front\search\indexController::class, 'index'])->name('index');
     });
-    Route::group(['namespace' => 'save', 'as' => 'save.', 'prefix' => 'kaydet'], function () {
+    Route::group(['namespace' => 'save', 'as' => 'save.', 'prefix' => 'kaydet','middleware'=>['auth']], function () {
         Route::get('/', [App\Http\Controllers\front\save\indexController::class, 'index'])->name('index');
         Route::get('/soru/{id}', [App\Http\Controllers\front\save\indexController::class, 'store'])->name('store');
     });
 
-    Route::group(['namespace' => 'comment', 'as' => 'comment.', 'prefix' => 'comment'], function () {
+    Route::group(['namespace' => 'comment', 'as' => 'comment.', 'prefix' => 'comment','middleware'=>['auth']], function () {
         Route::post('/store/{id}', [App\Http\Controllers\front\comment\indexController::class, 'store'])->name('store');
         Route::get('/like/{id}', [App\Http\Controllers\front\comment\indexController::class, 'LikeOrDiskLike'])->name('LikeOrDiskLike');
         Route::get('/delete/{id}', [App\Http\Controllers\front\comment\indexController::class, 'delete'])->name('delete');
         Route::get('/correct/{id}', [App\Http\Controllers\front\comment\indexController::class, 'correct'])->name('correct');
     });
 
-    Route::group(['namespace' => 'settings', 'as' => 'settings.', 'prefix' => 'ayarlar'], function () {
+    Route::group(['namespace' => 'settings', 'as' => 'settings.', 'prefix' => 'ayarlar','middleware'=>['auth']], function () {
         Route::get('/', [App\Http\Controllers\front\settings\indexController::class, 'index'])->name('index');
         Route::post('/', [App\Http\Controllers\front\settings\indexController::class, 'store'])->name('store');
 
