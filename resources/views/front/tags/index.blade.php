@@ -11,7 +11,8 @@
                     <div class="card-body">
                         @foreach ($data as $k => $v)
                             <li class="list-group-item">
-                                {{ $v['name'] }}
+                              <a href="{{route('tags.view',['selflink'=>$v['selflink']])}}">
+                                  {{ $v['name'] }}</a>
                             </li>
                         @endforeach
                     </div>

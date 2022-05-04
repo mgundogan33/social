@@ -65,7 +65,9 @@ Route::group(['namespace' => 'front'], function () {
     });
 
     Route::get('/{id}/{selflink}', [App\Http\Controllers\front\indexController::class, 'view'])->name('view')->middleware(['VisitorUser']);
-});
-Route::group(['namespace' => 'tags', 'as' => 'tags', 'prefix' => 'etiket'], function () {
-    Route::get('/', [\App\Http\Controllers\front\tags\indexController::class, 'index'])->name('index');
+
+    Route::group(['namespace' => 'tags', 'as' => 'tags.', 'prefix' => 'etiket'], function () {
+        Route::get('/', [\App\Http\Controllers\front\tags\indexController::class, 'index'])->name('index');
+        Route::get('/goruntule/{selflink}', [\App\Http\Controllers\front\tags\indexController::class, 'view'])->name('view');
+    });
 });

@@ -94,7 +94,7 @@
                     <div class="container">
                         <a href="{{ route('question.create') }}">+ Yeni Soru Sor </a>
                         - <a href="{{ route('user.all') }}">+ Kullanıcılar </a>
-
+                        - <a href="{{ route('tags.index') }}">+ Etiketler </a>
                     </div>
                 </div>
             @endauth
