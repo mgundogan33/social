@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::group(['namespace' => 'front'], function () {
     Route::get('/', [App\Http\Controllers\front\indexController::class, 'index'])->name('index');
+    Route::get('/cevaplanmis', [App\Http\Controllers\front\indexController::class, 'cevaplanmis'])->name('cevaplanmis');
+    Route::get('/cozumlenmis', [App\Http\Controllers\front\indexController::class, 'cozumlenmis'])->name('cozumlenmis');
+
 
     Route::group(['namespace' => 'question', 'as' => 'question.', 'prefix' => 'question'], function () {
         Route::get('/create', [App\Http\Controllers\front\question\indexController::class, 'create'])->name('create');
@@ -33,6 +36,7 @@ Route::group(['namespace' => 'front'], function () {
         Route::get('/{selflink}', [App\Http\Controllers\front\category\indexController::class, 'index'])->name('index');
     });
     Route::group(['namespace' => 'user', 'as' => 'user.', 'prefix' => 'kullanici'], function () {
+        Route::get('/hepsi',[App\Http\Controllers\front\user\indexController::class, 'all'])->name('all');
         Route::get('/{id}', [App\Http\Controllers\front\user\indexController::class, 'index'])->name('index');
     });
     Route::group(['namespace' => 'search', 'as' => 'search.', 'prefix' => 'ara'], function () {

@@ -2,15 +2,17 @@
 @section('content')
     <div class="container">
         <div class="row">
+
+
             <div class="col-lg-4">
                 <div class="profile-card-4 z-depth-3">
                     <div class="card">
                         <div class="card-body text-center bg-primary rounded-top">
                             <div class="user-box">
-                                <img src="{{ \App\Models\User::resim($data[0]['id']) }}" alt="user avatar">
+                                <img src="{{ \App\Models\User::resim($data->id) }}" alt="user avatar">
                             </div>
-                            <h5 class="mb-1 text-white">{{ \App\Models\User::getName($data[0]['id']) }}</h5>
-                            <h6 class="text-light">{{ $data[0]['job'] }}</h6>
+                            <h5 class="mb-1 text-white">{{ \App\Models\User::getName($data->id) }}</h5>
+                            <h6 class="text-light">{{ $data->job }}</h6>
                         </div>
                         <div class="card-body">
                             <ul class="list-group shadow-none">
@@ -19,7 +21,7 @@
                                         <i class="fa fa-phone-square"></i>
                                     </div>
                                     <div class="list-details">
-                                        <span>{{ $data[0]['phone'] }}</span>
+                                        <span>{{ $data->phone }}</span>
                                         <small>Telefon</small>
                                     </div>
                                 </li>
@@ -28,7 +30,7 @@
                                         <i class="fa fa-envelope"></i>
                                     </div>
                                     <div class="list-details">
-                                        <span>{{ $data[0]['email'] }}</span>
+                                        <span>{{ $data->email }}</span>
                                         <small>Email</small>
                                     </div>
                                 </li>
@@ -37,7 +39,7 @@
                                         <i class="fa fa-globe"></i>
                                     </div>
                                     <div class="list-details">
-                                        <span>{{ $data[0]['website'] }}</span>
+                                        <span>{{ $data->website }}</span>
                                         <small>Website</small>
                                     </div>
                                 </li>
@@ -45,17 +47,17 @@
                             <div class="row text-center mt-4">
                                 <div class="col p-2">
                                     <h4 class="mb-1 line-height-5">
-                                        {{ \App\Models\Questions::where('userId', $data[0]['id'])->count() }}</h4>
+                                        {{ \App\Models\Questions::where('userId', $data->id)->count() }}</h4>
                                     <small class="mb-0 font-weight-bold">Soru</small>
                                 </div>
                                 <div class="col p-2">
                                     <h4 class="mb-1 line-height-5">
-                                        {{ \App\Models\Comments::where('userId', $data[0]['id'])->count() }}</h4>
+                                        {{ \App\Models\Comments::where('userId', $data->id)->count() }}</h4>
                                     <small class="mb-0 font-weight-bold">Cevap</small>
                                 </div>
                                 <div class="col p-2">
                                     <h4 class="mb-1 line-height-5">
-                                        {{ \App\Models\Comments::where('userId', $data[0]['id'])->where('isCorrect', 1)->count() }}
+                                        {{ \App\Models\Comments::where('userId', $data->id)->where('isCorrect', 1)->count() }}
                                     </h4>
                                     <small class="mb-0 font-weight-bold">Doğru Cevap</small>
                                 </div>
@@ -92,7 +94,7 @@
                                 <h5 class="mb-3">Hakkımda</h5>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {!! str_replace("\n", '<br>', $data[0]['bio']) !!}
+                                        {!! str_replace("\n", '<br>', $data->bio) !!}
                                     </div>
                                 </div>
                                 <!--/row-->
@@ -100,13 +102,18 @@
                             <div class="tab-pane" id="messages">
                                 <table class="table table-hover table-striped">
                                     <tbody>
-                                        @foreach ($questions as $k=>$v)
-                                        <tr>
-                                            <td>
-                                                <span class="float-right font-weight-bold">{{\App\Helper\Helpers::time_ago($v['created_at'])}}</span>
-                                                <a href="{{route('view',['id'=>$v['id'],'selflink'=>$v['selflink']])}}">{{$v['title']}}</a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($questions as $k => $v)
+                                            <tr>
+                                                <td>
+                                                    <span
+                                                        class="float-right font-weight-bold">{{ \App\Helper\Helpers::time_ago($v['created_at']) }}</span>
+                                                    <a
+                                                        href="{{ route('view', [
+                                                            'id' => $v->id,
+                                                            'selflink' => $v->selflink,
+                                                        ]) }}">{{ $v->title }}</a>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -114,13 +121,16 @@
                             <div class="tab-pane" id="edit">
                                 <table class="table table-hover table-striped">
                                     <tbody>
-                                        @foreach ($comments as $k=>$v)
-                                        <tr>
-                                            <td>
-                                                <span class="float-right font-weight-bold">{{\App\Helper\Helpers::time_ago($v['created_at'])}}</span>
-                                                <a href="{{route('view',['id'=>$v['questionId'],'selflink'=>\App\Models\Questions::getSelflink($v['questionId'])])}}">{{$v['text']}}</a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($comments as $k => $v)
+                                            <tr>
+                                                <td>
+                                                    <span
+                                                        class="float-right font-weight-bold">{{ \App\Helper\Helpers::time_ago($v['created_at']) }}</span>
+                                                    <a href="{{ route('view',['id' => $v->id,'selflink' => \App\Models\Questions::getSelflink($v->questionId),]) }}">
+                                                        {{ $v->text }}
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

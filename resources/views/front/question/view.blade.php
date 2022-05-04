@@ -83,7 +83,7 @@
                                                     <a href="{{ route('comment.delete', ['id' => $v['id']]) }}"><i
                                                             class="fa-solid fa-trash"></i></a>
                                                 @endif
-                                                @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'] and \App\Models\Comments::isCorrectVariable($data[0]['id'] == 0))
+                                                @if (\Illuminate\Support\Facades\Auth::id() == $data[0]['userId'] and \App\Models\Comments::isCorrectVariable($data[0]['id'] )== 0)
                                                     <a href="{{ route('comment.correct', ['id' => $v['id']]) }}"><i
                                                             class="fa-solid fa-check"></i></a>
                                                 @endif

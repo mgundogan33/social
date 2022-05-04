@@ -14,12 +14,17 @@ class indexController extends Controller
     {
         $c = User::whereId($id)->count();
         if ($c != 0) {
-            $data = User::where('id', $id)->get();
+            $data = User::find($id);
             $questions = Questions::where('userId', $id)->orderBy('id', 'desc')->get();
             $comments = Comments::where('userId', $id)->orderBy('id', 'desc')->get();
-            return view('front.user.index', ['data' => $data, 'questions' => $questions,'comments'=> $comments]);
+            return view('front.user.index', compact('data', 'questions', 'comments'));
         } else {
-            abort(404,);
+            abort(404);
         }
+    }
+    public function all()
+    {
+        $data = User::orderBy('id', 'desc')->paginate(10);
+        return view('front.user.all', ['data' => $data]);
     }
 }

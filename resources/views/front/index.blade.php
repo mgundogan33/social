@@ -4,7 +4,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h3>Son Sorular</h3>
+                <h3>{{$title}}</h3>
+                - <a href="{{route('index')}}">Son Sorular</a>
+                - <a href="{{route('cevaplanmis')}}">Cevaplanmış</a>
+                - <a href="{{route('cozumlenmis')}}">Çözümlenmiş</a>
                 <ul class="list-unstyled">
                     @foreach ($data as $key => $v)
                         <li class="media">

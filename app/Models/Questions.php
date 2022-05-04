@@ -12,8 +12,8 @@ class Questions extends Model
 
     static function getSelflink($questionId)
     {
-        $data = Questions::where('id', $questionId)->get();
-        return $data[0]['selflink'];
+         $data = Questions::where('id',$questionId)->get();
+         return $data[0]['selflink'];
     }
 
     static function getTitle($questionId)
